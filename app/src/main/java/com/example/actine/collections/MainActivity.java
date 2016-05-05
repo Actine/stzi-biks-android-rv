@@ -2,6 +2,9 @@ package com.example.actine.collections;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,20 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 new Pizza("Чілі", 60, R.drawable.pizza_2),
         };
 
-        LinearLayout pizzaList = (LinearLayout) findViewById(R.id.pizza_list);
-
-        for (final Pizza pizza : pizzas) {
-            View item = getLayoutInflater().inflate(R.layout.item_pizza, pizzaList, false);
-            ((TextView) item.findViewById(R.id.name)).setText(pizza.name);
-            ((TextView) item.findViewById(R.id.price)).setText(String.format("%d ₴", pizza.price));
-            ((ImageView) item.findViewById(R.id.photo)).setImageDrawable(getResources().getDrawable(pizza.pizzaImageId));
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(MainActivity.this, "Вибрано піцу: " + pizza.name, Toast.LENGTH_SHORT).show();
-                }
-            });
-            pizzaList.addView(item);
-        }
+        RecyclerView pizzaList = (RecyclerView) findViewById(R.id.pizza_list);
+        pizzaList.setAdapter(new PizzaAdapter(this, pizzas));
+        pizzaList.setLayoutManager(new LinearLayoutManager(this));
     }
 }
