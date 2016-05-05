@@ -1,0 +1,65 @@
+package com.example.actine.collections;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Pizza[] pizzas = {
+                new Pizza("Маргарита", 50, R.drawable.pizza_1),
+                new Pizza("Салямі", 60, R.drawable.pizza_2),
+                new Pizza("М’ясна", 70, R.drawable.pizza_3),
+                new Pizza("Гавайська", 55, R.drawable.pizza_1),
+                new Pizza("Кальцоне", 60, R.drawable.pizza_3),
+                new Pizza("Квадро формаджо", 80, R.drawable.pizza_4),
+                new Pizza("Чілі", 60, R.drawable.pizza_2),
+                new Pizza("Маргарита", 50, R.drawable.pizza_1),
+                new Pizza("Салямі", 60, R.drawable.pizza_2),
+                new Pizza("М’ясна", 70, R.drawable.pizza_3),
+                new Pizza("Гавайська", 55, R.drawable.pizza_1),
+                new Pizza("Кальцоне", 60, R.drawable.pizza_3),
+                new Pizza("Квадро формаджо", 80, R.drawable.pizza_4),
+                new Pizza("Чілі", 60, R.drawable.pizza_2),
+                new Pizza("Маргарита", 50, R.drawable.pizza_1),
+                new Pizza("Салямі", 60, R.drawable.pizza_2),
+                new Pizza("М’ясна", 70, R.drawable.pizza_3),
+                new Pizza("Гавайська", 55, R.drawable.pizza_1),
+                new Pizza("Кальцоне", 60, R.drawable.pizza_3),
+                new Pizza("Квадро формаджо", 80, R.drawable.pizza_4),
+                new Pizza("Чілі", 60, R.drawable.pizza_2),
+                new Pizza("Маргарита", 50, R.drawable.pizza_1),
+                new Pizza("Салямі", 60, R.drawable.pizza_2),
+                new Pizza("М’ясна", 70, R.drawable.pizza_3),
+                new Pizza("Гавайська", 55, R.drawable.pizza_1),
+                new Pizza("Кальцоне", 60, R.drawable.pizza_3),
+                new Pizza("Квадро формаджо", 80, R.drawable.pizza_4),
+                new Pizza("Чілі", 60, R.drawable.pizza_2),
+        };
+
+        LinearLayout pizzaList = (LinearLayout) findViewById(R.id.pizza_list);
+
+        for (final Pizza pizza : pizzas) {
+            View item = getLayoutInflater().inflate(R.layout.item_pizza, pizzaList, false);
+            ((TextView) item.findViewById(R.id.name)).setText(pizza.name);
+            ((TextView) item.findViewById(R.id.price)).setText(String.format("%d ₴", pizza.price));
+            ((ImageView) item.findViewById(R.id.photo)).setImageDrawable(getResources().getDrawable(pizza.pizzaImageId));
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(MainActivity.this, "Вибрано піцу: " + pizza.name, Toast.LENGTH_SHORT).show();
+                }
+            });
+            pizzaList.addView(item);
+        }
+    }
+}
